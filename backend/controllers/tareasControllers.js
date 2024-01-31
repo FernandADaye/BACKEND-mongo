@@ -2,6 +2,7 @@ const getTareas = (req, res) =>{
     res.status(200).json({ mensaje: 'Get Tareas'})
 }
 const createTareas = (req, res) =>{
+    console.log(req.body);
     res.status(201).json({ mensaje: 'Create Tareas'})
 }
 const updateTareas = (req, res) =>{
