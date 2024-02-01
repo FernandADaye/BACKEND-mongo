@@ -5,7 +5,9 @@ const port = process.env.PORT || 3001
 const conectdb= require('../backend/config/db')
 const colors = require('colors')
 const {errorHandler} = require ('../backend/meddleware/ErrorMeddlerWare')
-conectdb()
+
+conectdb();
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
