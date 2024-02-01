@@ -1,0 +1,10 @@
+const errorHandler = (err, req, re, next)=>{
+    const statuscode = res.statuscode ? res.statuscode : 500
+    res.json ({
+        message: err.message,
+        stack: process.env.NODE_ENV === 'production' ? null : err.stack 
+    })
+}
+module.exports={
+    errorHandler
+}
