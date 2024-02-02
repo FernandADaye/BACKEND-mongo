@@ -11,9 +11,9 @@ conectdb();
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
-app.use(errorHandler)
 app.use('/tarea', require('./routes/tareasRoutes'))
 app.use('/tarea/users', require('./routes/tareasRoutes'))
+app.use(errorHandler);
 
-app.listen(port, ()=>console.log(`jalo en ${port}`))
+app.listen(port, ()=>console.log(`por fin jalo en el puerto ${port}`))
 

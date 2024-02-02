@@ -6,16 +6,34 @@ const getTareas = asyncHandler(async (req, res) => {
   res.status(200).json(tareas);
 });
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
+// const createTareas = asyncHandler(async (req, res) => {
+  // console.log(req.body);
+  // if (!req.body.descripcion) {
+    // res.status(400);
+    // throw new Error("tienes que poner una descripcion, no es pregunta  ");
+  // }
+  // const tareas = await tTarea.create ({
+    // descripcion: req.body.descripcion
+  // })
+  // res.status(201).json(tareas)
+// });
+// 
 const createTareas = asyncHandler(async (req, res) => {
+  console.log('Body recibido:', req.body);
+
   if (!req.body.descripcion) {
+    console.log('Error: Falta descripción en el cuerpo de la solicitud.');
     res.status(400);
-    throw new Error("ingresa una descripcion ");
+    throw new Error("Tienes que poner una descripción, no es una pregunta.");
   }
-  const tareas = await tTarea.create ({
-    descripcion:req.body.descripcion
-  })
-  res.status(201).json(tareas)
+
+  const tareas = await tTarea.create({
+    descripcion: req.body.descripcion
+  });
+
+  res.status(201).json(tareas);
 });
+
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
 const updateTareas = asyncHandler(async (req, res) => {
   const tareas = await tTarea.findById(req.params.id)
