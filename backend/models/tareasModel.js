@@ -1,7 +1,7 @@
-const mongoose = require( 'mongoose ')
-const tareaSchema= mongoose.Schema({
+const mongoose = require('mongoose')
+const tareaSchema = mongoose.Schema({
     user:{
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true ,
         ref: 'User'
     },

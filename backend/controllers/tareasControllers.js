@@ -1,4 +1,4 @@
-const asyncHandler = require("express-async-handler");
+const asyncHandler = require('express-async-handler');
 const tTarea = require ('../models/tareasModel')
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
 const getTareas = asyncHandler(async (req, res) => {
