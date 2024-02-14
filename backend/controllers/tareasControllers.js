@@ -49,7 +49,16 @@ const updateTareas = asyncHandler(async (req, res) => {
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
 
 const deleteTareas = asyncHandler(async (req, res) => {
-  res.status(200).json({ mensaje: `id: ${req.params.id}` });
+  const tarea = await tTarea.findById(req.params.id)
+  if (!tarea) {
+    res.status (400)
+    throw new Error('eso no existe ')
+  } 
+  else{  await tTarea.deleteOne(tarea)
+  res.status(200).json({id: res.params.id})
+  }
+
+  res.status(200).json({ });
 });
 
 module.exports = {
