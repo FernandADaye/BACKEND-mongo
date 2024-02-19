@@ -23,7 +23,7 @@ const createTareas = asyncHandler(async (req, res) => {
 
   if (!req.body.description) {
     console.log('Error: Falta descripción en el cuerpo de la solicitud.');
-    res.status(200);
+    res.status(400);
     throw new Error("Tienes que poner una descripción, no es una pregunta.");
   }
 

@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 app.use('/tarea', require('./routes/tareasRoutes'))
-app.use('/tarea/users', require('./routes/tareasRoutes'))
+app.use('/users', require('./routes/usersRoutes'))
 
 app.use(errorHandler);
 
