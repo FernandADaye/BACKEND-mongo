@@ -9,7 +9,7 @@ const userSchema= mongoose.Schema({
         required:[true, "Ingresa un Imail "],
         unique: true
     },
-    passward:{
+    password:{
         type: String, 
         required:[true, "Ingresa una contraseña  "]
     },

@@ -3,6 +3,9 @@
     const asyncHandler =    require ('express-async-handler')
     const User= require('../models/usersModel')
 
+
+
+//debe tener todos los datos para crear un usuario 
 const crearUser = asyncHandler(  async(req, res) =>{
     const {name, email, password } =  req.body
     if (!name || !email || !password ) {
@@ -15,10 +18,39 @@ const crearUser = asyncHandler(  async(req, res) =>{
     if (userExiste) {
         res.status(400)
         throw new Error('Ese usuario ya existe ')
-    }
+    }    
 
-    res.status(201).json({message:'Crear usuario '})
+    //crear HASH
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+//definir el usuario 
+const user = await User.create({
+    name,
+    email,
+    password: hashedPassword
 })
+if (user) {
+    res.status(201).json({
+        _id : user._id,
+        name : user.name,
+        email : user.email
+    })    
+}else{
+    res.status(400)
+    throw new Error ('no se creo Usuario 😐')
+}
+    //res.status(201).json({message:'Crear usuario '})
+})
+
+
+
+
+
+
+
+
+
 const loginUser = asyncHandler( async(req, res) =>{
     res.status(201).json({message:'login usuario '})
 })
