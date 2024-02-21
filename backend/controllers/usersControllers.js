@@ -56,6 +56,7 @@ if (user && (await bcrypt.compare(password, user.password))) {
         _id: user.id,
         name: user.name,
         email:user.email,
+        token: generarToken(user.id)
     })
 }else{
     res.status(400)
@@ -69,47 +70,14 @@ const datoUser = asyncHandler( async(req, res) =>{
     res.status(201).json({message:'datos del usuario '})
 })
 
-
-
-
-
-//HASH PASSWORD 
-// const salt = await bcrypt.genSalt(10)
-// Password = await bcrypt.hash(password,salt)
-// 
-//crear el usuario 
-// const user = await User.create({
-    // name, 
-    // email, 
-    // password: hashedPassword 
-// })
-
-// if (user) {
-    // res.status(201).json({
-        // _id: user.id,
-        // name: user.name,
-        // email: user.email
-    // })
-// } else {
-    // res.status(400)
-    // throw new Error('No se pudieron guardar los datos')
-// }
+const generarToken = (id_usuario)=>{
+    return jwt.sign({id_usuario}, process.env.JWT_SECRET,{
+        expireIn: '5d'
+    })
+}
 
 module.exports={
 crearUser,
 loginUser,
 datoUser
 }
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-
-
