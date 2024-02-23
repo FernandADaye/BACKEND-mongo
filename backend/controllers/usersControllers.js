@@ -60,7 +60,7 @@ if (user && (await bcrypt.compare(password, user.password))) {
     })
 }else{
     res.status(400)
-    throw new Erorr ('no se puedo hacer eso ')
+    throw new Error('no se puedo hacer eso ')
 }
     res.status(201).json({message:'login usuario '})
 })
@@ -68,7 +68,10 @@ if (user && (await bcrypt.compare(password, user.password))) {
 
 
 const datoUser = asyncHandler( async(req, res) =>{
-    res.status(201).json({message:'datos del usuario '})
+    res.status(201).json({
+        name: (User.name),
+        token: generarToken(User.id)
+    })
 })
 
     const generarToken = (id_usuario)=>{
