@@ -38,24 +38,21 @@ const createTareas = asyncHandler(async (req, res) => {
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
 const updateTareas = asyncHandler(async (req, res) => {
   const tareas = await tTarea.findById(req.params.id)
-  if (!tareas) {
+  if (tareas.user.toString()!== req.user.id) {
     res.status(400)
     throw new Error('no existe eso ')
-    
+  }else{
+    const tareaUpdated = await tTarea.findByIdAndUpdate (req.params.id, req.body, {new: true})
+    res.status(201).json(tareaUpdated)
   }
- const tareaUpdated = await tTarea.findByIdAndUpdate (req.params.id, req.body, {new: true})
- res.status(201).json(tareaUpdated)
-
 });
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
-
 const deleteTareas = asyncHandler(async (req, res) => {
   const tarea = await tTarea.findById(req.params.id)
-  if (!tarea) {
+  if ( tarea.user.toString() !== req.user.id) {
     res.status (400)
     throw new Error('eso no existe ')
-  } 
-  else{  await tTarea.deleteOne(tarea)
+  } else{  await tTarea.deleteOne(tarea)
   res.status(200).json({id: res.params.id})
   }
 
