@@ -2,39 +2,26 @@ const asyncHandler = require('express-async-handler');
 const tTarea = require ('../models/tareasModel')
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
 const getTareas = asyncHandler(async (req, res) => {
-  const tareas = await tTarea.find({uaer: req.user.id})
+  const tareas = await tTarea.find({user: req.user.id})
   res.status(200).json(tareas);
 });
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
-// const createTareas = asyncHandler(async (req, res) => {
-  // console.log(req.body);
-  // if (!req.body.descripcion) {
-    // res.status(400);
-    // throw new Error("tienes que poner una descripcion, no es pregunta  ");
-  // }
-  // const tareas = await tTarea.create ({
-    // descripcion: req.body.descripcion
-  // })
-  // res.status(201).json(tareas)
-// });
-// 
 const createTareas = asyncHandler(async (req, res) => {
   console.log('Body recibido:', req.body);
 
-  if (!req.body.description) {
+  if (!req.body.descripcion) {
     console.log('Error: Falta descripción en el cuerpo de la solicitud.');
     res.status(400);
     throw new Error("Tienes que poner una descripción, no es una pregunta.");
   }
 
-  const tareas = await tTarea.create({
-    description: req.body.description,
-    user: req.user.id
-  })
+    const tarea = await tTarea.create({
+        descripcion: req.body.descripcion,
+        user: req.user.id
+    })
 
-  res.status(201).json(tareas);
-});
-
+    res.status(201).json(tarea)
+})
 // ▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫
 const updateTareas = asyncHandler(async (req, res) => {
   const tareas = await tTarea.findById(req.params.id)
