@@ -6,7 +6,6 @@ const dotenv = require('dotenv').config()
 const {errorHandler}  = require ('../backend/meddleware/ErrorMeddlerWare.js')
 const cors = require('cors')
 const port = process.env.PORT || 3001
-const cors = require('cors')
 
 conectdb()
 const app = express()
